@@ -57,8 +57,8 @@ architecture RTL of boothMult is
 	
 	constant encbits : integer := 3*(databits/2);
 	
-	type add_o is array (0 to (databits/2-2)) of std_logic_vector(2*(databits)-1 downto 0); -- The adders' output is a matrix and has (N/2)-1 rows which correspond to the number of muxs
-																														 -- and 2*N colomns which is equal to twice the number of data bits.
+	type add_o is array (0 to (databits/2-2)) of std_logic_vector(2*(databits)-1 downto 0); -- The adders' output is a matrix and has (N/2)-1 rows and 2*N colomns which are equal to twice the number of data bits.
+
 	type mux_s is array (0 to (databits/2-1)) of std_logic_vector(2 downto 0);					 -- The muxs' selector is a matrix and has (N/2)-1 rows which correspond to the number of muxs
 																														 -- and 3 colomns which is equal to the exact number of bits needed for each group.
 	type mux_o is array (0 to (databits/2-1)) of std_logic_vector(2*(databits)-1 downto 0); -- The muxs' output is a matrix and has (N/2)-1 rows which correspond to the number of muxs
