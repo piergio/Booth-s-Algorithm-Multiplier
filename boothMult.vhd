@@ -12,7 +12,7 @@ entity boothMult is
 			);
 end entity boothMult;
 
-architecture RTL of boothMult is
+architecture MIXED of boothMult is
 	
 	component twoComplGen
 		generic(n : integer := 8);
@@ -156,4 +156,4 @@ architecture RTL of boothMult is
 	
 	P <= add_out(nBits/2-2);		-- We take the last element(last row) of the add_out matrix signal to see the computed result
 	
-end architecture RTL;
+end architecture MIXED;
