@@ -59,9 +59,9 @@ architecture MIXED of boothMult is
 	
 	type add_o is array (0 to (nBits/2-2)) of std_logic_vector(2*(nBits)-1 downto 0); -- The adders' output is a matrix and has (N/2)-1 rows and 2*N colomns which are equal to twice the number of data bits.
 
-	type mux_s is array (0 to (nBits/2-1)) of std_logic_vector(2 downto 0);					 -- The muxs' selector is a matrix and has (N/2)-1 rows which correspond to the number of muxs
+	type mux_s is array (0 to (nBits/2-1)) of std_logic_vector(2 downto 0);					 -- The muxes' selector is a matrix and has (N/2)-1 rows which correspond to the number of muxes
 																														 -- and 3 colomns which is equal to the exact number of bits needed for each group.
-	type mux_o is array (0 to (nBits/2-1)) of std_logic_vector(2*(nBits)-1 downto 0); -- The muxs' output is a matrix and has (N/2)-1 rows which correspond to the number of muxs
+	type mux_o is array (0 to (nBits/2-1)) of std_logic_vector(2*(nBits)-1 downto 0); -- The muxes' output is a matrix and has (N/2)-1 rows which correspond to the number of muxes
 																														 -- and 2*N colomns which is equal to twice the number of data bits.
 	
 	signal add_out	: add_o;
@@ -102,13 +102,13 @@ architecture MIXED of boothMult is
 		);
 
 	-- The below "for generate" connects the output signal enc_out of the boothenc to the mux_sel signal which is a matrix.
-	-- The selector is essential for selecting the different muxs.
-	forENCconn : for i in 0 to (nBits/2-1)  generate	-- from 0 to the maximum number of muxs needed
+	-- The selector is essential for selecting the different muxes.
+	forENCconn : for i in 0 to (nBits/2-1)  generate	-- from 0 to the maximum number of muxes needed
 	begin																	
 		mux_sel(i) <= enc_out(3*i+2 downto 3*i);				-- it takes 3 bits from enc_out at each iteration. In this way, the mux sel matrix is having 3 bits for each and every row.
 	end generate;
 	
-	-- The below "for generate" instantiates N/2 muxs and connects to them the right data
+	-- The below "for generate" instantiates N/2 muxes and connects to them the right data
 	mux_gen: for i in 0 to (nBits/2-1) generate
 	begin
 		mux: MUX51_generic 
@@ -126,7 +126,7 @@ architecture MIXED of boothMult is
 	
 	end generate mux_gen;
 	
-	-- The below code instantiates 1 RCA and connects the outputs of the muxs to RCA inputs 
+	-- The below code instantiates 1 RCA and connects the outputs of the muxes to RCA inputs 
 	sum1 : RCA
 		   generic map(
 		   			n => 2*nBits
